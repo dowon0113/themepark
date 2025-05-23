@@ -182,7 +182,7 @@ DefaultErrorHandler errorHandler = new DefaultErrorHandler(
 <br><br>
 
 ## 트러블 슈팅
-### [입장권 티켓팅 시 발생하는 동시성 문제 해결하기]([https://github.com/numberOnethemepark/themepark/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%851](https://velog.io/@dowonii_dev/%EC%9E%85%EC%9E%A5%EA%B6%8C-%ED%8B%B0%EC%BC%93%ED%8C%85-%EC%8B%9C-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0))
+### [입장권 티켓팅 시 발생하는 동시성 문제 해결하기](https://github.com/dowon0113/themepark/wiki/%5B%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85%5D-%EC%9E%85%EC%9E%A5%EA%B6%8C-%ED%8B%B0%EC%BC%93%ED%8C%85-%EC%8B%9C-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)
 ### 
 <br><br>
 
