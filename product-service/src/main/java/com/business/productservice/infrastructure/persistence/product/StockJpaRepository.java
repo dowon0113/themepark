@@ -17,4 +17,6 @@ public interface StockJpaRepository extends JpaRepository<StockEntity, UUID>, St
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT s FROM StockEntity s WHERE s.id = :id")
     Optional<StockEntity> findByIdWithPessimisticLock(@Param("id") UUID id);
+
+    Optional<StockEntity> findById(UUID id);
 }

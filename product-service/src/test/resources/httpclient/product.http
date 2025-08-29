@@ -9,9 +9,9 @@ Content-Type: application/json
     "description": "8월 한정 20% 할인",
     "productType": "EVENT",
     "price": 25000,
-    "limitQuantity": 100,
-    "eventStartAt": "2025-05-01T09:00:00",
-    "eventEndAt": "2025-05-31T23:59:59"
+    "limitQuantity": 1000,
+    "eventStartAt": "2025-08-01T09:00:00",
+    "eventEndAt": "2025-08-31T23:59:59"
   }
 }
 
@@ -84,7 +84,7 @@ Authorization: {{accessToken}}
 Content-Type: application/json
 
 ### 8. 상품 재고 차감 (내부 호출용) - 선착순 1인 1예매
-POST http://localhost:8080/v1/products/internal/476c2d9e-cb99-49a3-9fb8-721096683d04/stocks-decrease
+POST http://localhost:8080/v1/products/internal/cbbf3680-2224-4287-bc34-7bc3b1cd2abd/stocks-decrease
 Authorization: {{accessToken}}
 Content-Type: application/json
 

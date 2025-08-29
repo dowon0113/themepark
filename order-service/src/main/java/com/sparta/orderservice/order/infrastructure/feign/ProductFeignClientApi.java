@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.UUID;
 
 @FeignClient(
-        name = "product-service-client",
+        name = "product-service",
         url = "http://localhost:8004",
         configuration = FeignConfig.class
 )
