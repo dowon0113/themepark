@@ -102,17 +102,21 @@ public class ProductServiceImplApiV3 implements ProductServiceApiV3 {
     @Override
     @Transactional
     public void postDecreaseById(UUID id, String orderId) {
+
+        //분산락 획득. 키: lock:stock:{상품ID}
         String lockKey = "lock:stock:"+id;
         RLock lock = redissonClient.getLock(lockKey);
 
         boolean isLocked = false;
         try{
+            //최대 5초까지 락을 기다림. 락을 잡은 뒤 3초 후 자동해제
             isLocked = lock.tryLock(5, 3, TimeUnit.SECONDS); // waitTime: 5초, leaseTime: 3초
 
 //            System.out.println("현재 락 키 존재 여부: " + redissonClient.getKeys().getKeysStream()
 //                    .filter(key -> key.startsWith("lock:"))
 //                    .toList());
 
+            //락을 못잡으면 예외터짐.
             if (!isLocked) {
                 throw new CustomException(ProductExceptionCode.LOCK_FAILED);
             }
@@ -120,12 +124,14 @@ public class ProductServiceImplApiV3 implements ProductServiceApiV3 {
             StockEntity stockEntity = stockRepository.findById(id)
                     .orElseThrow(() -> new CustomException(ProductExceptionCode.PRODUCT_NOT_FOUND));
 
+            //재고 부족으로 인한 예외 발생
             if (stockEntity.getStock() <= 0) {
                 throw new CustomException(ProductExceptionCode.PRODUCT_STOCK_SOLDOUT);
             }
 
             stockEntity.decrease();
 
+            //트랜잭션 범위 내에서 캐시 갱신. 읽기 경로에서 빠른 재고 확인을 위해 최신값을 바로 반영
             String cacheKey = "stock:" + id;
             redisTemplate.opsForValue().set(cacheKey, stockEntity.getStock(), Duration.ofMinutes(5));
 
@@ -151,6 +157,7 @@ public class ProductServiceImplApiV3 implements ProductServiceApiV3 {
             throw e;
         } finally{
             if (isLocked) {
+                //커밋 이후 동작! 트랜잭션이 커밋된 뒤 카프카 성공 메세지 발행. 그 후 락 해제
                 TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
                     @Override
                     public void afterCommit() {

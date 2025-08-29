@@ -56,6 +56,9 @@ spring:
         - name: CircuitBreaker
           args:
             name: defaultCircuitBreaker
+      httpclient:
+        connect-timeout: 3000         # 연결 타임아웃
+        response-timeout: 60s         # 기존 10s → 30s
 
 springdoc:
   swagger-ui:

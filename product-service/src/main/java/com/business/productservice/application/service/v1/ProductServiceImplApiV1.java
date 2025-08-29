@@ -91,7 +91,10 @@ public class ProductServiceImplApiV1 implements ProductServiceApiV1 {
     @Override
     @Transactional
     public void postDecreaseById(UUID id) {
-        StockEntity stockEntity = stockRepository.findByIdWithPessimisticLock(id)
+//        StockEntity stockEntity = stockRepository.findByIdWithPessimisticLock(id)
+//                .orElseThrow(() -> new CustomException(ProductExceptionCode.PRODUCT_NOT_FOUND));
+
+        StockEntity stockEntity = stockRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ProductExceptionCode.PRODUCT_NOT_FOUND));
 
         if (stockEntity.getStock() <= 0) {

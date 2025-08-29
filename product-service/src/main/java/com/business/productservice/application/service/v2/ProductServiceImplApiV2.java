@@ -97,20 +97,29 @@ public class ProductServiceImplApiV2 implements ProductServiceApiV2 {
     @Override
     @Transactional
     public void postDecreaseById(UUID id) {
-        String lockKey = "lock:stock:"+id;
+        String lockKey = "lock:stock:" + id;
         RLock lock = redissonClient.getLock(lockKey);
 
         boolean isLocked = false;
-        try{
-            isLocked = lock.tryLock(5, 3, TimeUnit.SECONDS); // waitTime: 5초, leaseTime: 3초
 
+        int retryCount = 3; // 재시도 횟수
+        for (int i = 0; i < retryCount; i++) {
+            try {
+                isLocked = lock.tryLock(3, 1, TimeUnit.SECONDS); // waitTime: 3초, leaseTime: 1초
+                if (isLocked) break;
+            } catch (InterruptedException e) {
+                throw new CustomException(ProductExceptionCode.LOCK_INTERRUPTED);
+            }
+        }
+
+        if (!isLocked) {
+            throw new CustomException(ProductExceptionCode.PRODUCT_STOCK_SOLDOUT); // 끝까지 락 못 잡은 경우
+        }
+
+        try {
             System.out.println("현재 락 키 존재 여부: " + redissonClient.getKeys().getKeysStream()
                     .filter(key -> key.startsWith("lock:"))
                     .toList());
-
-            if (!isLocked) {
-                throw new CustomException(ProductExceptionCode.LOCK_FAILED);
-            }
 
             StockEntity stockEntity = stockRepository.findById(id)
                     .orElseThrow(() -> new CustomException(ProductExceptionCode.PRODUCT_NOT_FOUND));
@@ -127,9 +136,8 @@ public class ProductServiceImplApiV2 implements ProductServiceApiV2 {
             if (stockEntity.getStock() == 0) {
                 sendStockSoldOutSlack(stockEntity);
             }
-        } catch(InterruptedException e){
-            throw new CustomException(ProductExceptionCode.LOCK_INTERRUPTED);
-        } finally{
+
+        } finally {
             if (isLocked) {
                 TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
                     @Override
@@ -139,7 +147,6 @@ public class ProductServiceImplApiV2 implements ProductServiceApiV2 {
                 });
             }
         }
-
     }
 
     @Override

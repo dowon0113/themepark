@@ -84,7 +84,7 @@ Authorization: {{accessToken}}
 Content-Type: application/json
 
 ### 8. 상품 재고 차감 (내부 호출용) - 선착순 1인 1예매
-POST http://localhost:8080/v2/products/internal/476c2d9e-cb99-49a3-9fb8-721096683d04/stocks-decrease
+POST http://localhost:8080/v2/products/internal/8ad8448e-b184-4f14-b228-dc6e4fa29bb4/stocks-decrease
 Authorization: {{accessToken}}
 Content-Type: application/json
 
