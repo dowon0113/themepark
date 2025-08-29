@@ -1,7 +1,10 @@
+server:
+  port: 8080
+
 spring:
   data:
     redis:
-      host: localhost
+      host: 3.39.10.27
       port: 6379
       password: systempass
 
@@ -9,8 +12,6 @@ spring:
     name: gateway-service
   jwt:
     secret: "MeyhsO2FjOuniO2MjO2BrOyLnO2BrOumv+2CpOyeheuLiOuLpOyVhOyVhOyVhOyVhOyVhOyVhA=="
-  #  profiles:
-  #    active: local
   main:
     web-application-type: reactive
   autoconfigure:
@@ -53,9 +54,6 @@ spring:
         - name: CircuitBreaker
           args:
             name: defaultCircuitBreaker
-      httpclient:
-        connect-timeout: 3000         # 연결 타임아웃
-        response-timeout: 60s         # 기존 10s → 30s
 
 springdoc:
   swagger-ui:
@@ -78,6 +76,8 @@ springdoc:
 
 eureka:
   client:
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
@@ -111,5 +111,13 @@ resilience4j:
       defaultCircuitBreaker: # circuitbreaker name
         baseConfig: default # 기본 config 지정
         slowCallDurationThreshold: 3000
-  profiles:
-    active: prod
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 60s  # 60초로 늘림
+        cancelRunningFuture: true
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    reactor.netty.http.client: DEBUG
