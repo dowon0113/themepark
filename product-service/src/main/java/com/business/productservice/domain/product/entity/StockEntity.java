@@ -34,7 +34,7 @@ public class StockEntity extends BaseEntity {
 
     public StockEntity(ProductEntity product, Integer stock) {
         this.product = product;
-        this.productStockId = product.getId(); // MapsId 동기화
+        //this.productStockId = product.getId(); // MapsId 동기화
         this.stock = stock;
 
         // 양방향 연관관계 연결
