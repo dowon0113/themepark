@@ -49,7 +49,7 @@ public class ProductEntity extends BaseEntity {
     private LocalDateTime eventEndAt;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    private StockEntity stock = new StockEntity();
+    private StockEntity stock;
 
     @Builder
     public ProductEntity(String name, String description, ProductType productType,
