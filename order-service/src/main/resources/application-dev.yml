@@ -11,7 +11,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: order_service
 
   data:
     redis:
@@ -25,7 +30,26 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
+app:
+  mq:
+    exchange: stock.direct
+    routingKey: stock.decrease
+    queue: stock.decrease.q         # ★ 추가
+    dlx: stock.dlx                  # ★ 추가 (Dead Letter Exchange 이름)
+    dlq: stock.decrease.dlq
+
+    # ★ 결과 이벤트(새로 추가)
+    result-exchange: stock.result.direct
+    result-queue: order.stock.result.q
+    result-routing-keys:
+      - stock.decreased
+      - stock.rejected
 
 server:
   port: 8002
