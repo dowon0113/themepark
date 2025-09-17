@@ -11,4 +11,13 @@ Authorization: {{accessToken}}
   }
 }
 
+### 내가 만든 주문 생성
+POST http://localhost:8080/v1/orders
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+  "productId": "6b8f9cf1-16ac-40dd-bc00-60832b234d5c",
+  "amount": 1
+}
 

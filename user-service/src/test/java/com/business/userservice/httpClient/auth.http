@@ -4,9 +4,9 @@ Content-Type: application/json
 
 {
     "user": {
-        "username": "test20",
-        "password": "passworddddddddd",
-        "slackId": "010xxxx1238"
+        "username": "dowon",
+        "password": "dowon12345",
+        "slackId": "01011112222"
     }
 }
 
@@ -16,8 +16,8 @@ Content-Type: application/json
 
 {
   "user": {
-    "username": "test8",
-    "password": "passworddddddddd"
+    "username": "dowon",
+    "password": "dowon12345"
   }
 }
 

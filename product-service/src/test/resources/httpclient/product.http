@@ -5,13 +5,13 @@ Content-Type: application/json
 
 {
   "product": {
-    "name": "할인 이용권",
-    "description": "8월 한정 20% 할인",
+    "name": "프리!!!!!",
+    "description": "공짜입니다 얼렁 사세요",
     "productType": "EVENT",
-    "price": 25000,
+    "price": 1000,
     "limitQuantity": 1000,
-    "eventStartAt": "2025-08-01T09:00:00",
-    "eventEndAt": "2025-08-31T23:59:59"
+    "eventStartAt": "2025-09-01T09:00:00",
+    "eventEndAt": "2025-09-30T23:59:59"
   }
 }
 
@@ -55,20 +55,19 @@ Authorization: {{accessToken}}
 Content-Type: application/json
 
 ### 5. 상품 정보 수정
-PUT http://localhost:8080/v1/products/e61caf66-b5c0-4e23-bb9f-fd75821efc67
+PUT http://localhost:8080/v1/products/21a99d23-3557-4cda-a29f-6a5ef34b871a
 Authorization: {{accessToken}}
 Content-Type: application/json
 
 {
   "product": {
-    "id": "476c2d9e-cb99-49a3-9fb8-721096683d04",
     "name": "할인 이용권",
-    "description": "8월 한정 20% 할인",
+    "description": "10월 한정 20% 할인",
     "productType": "EVENT",
-    "price": 25000,
-    "limitQuantity": 100,
-    "eventStartAt": "2025-05-01T09:00:00",
-    "eventEndAt": "2025-05-31T23:59:59",
+    "price": 1000,
+    "limitQuantity": 0,
+    "eventStartAt": "2025-10-01T09:00:00",
+    "eventEndAt": "2025-10-30T23:59:59",
     "productStatus": "OPEN"
   }
 }

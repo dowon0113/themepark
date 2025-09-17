@@ -6,12 +6,12 @@ Content-Type: application/json
 {
   "product": {
     "name": "할인 이용권",
-    "description": "8월 한정 20% 할인",
+    "description": "10월 한정 20% 할인",
     "productType": "EVENT",
-    "price": 25000,
+    "price": 1000,
     "limitQuantity": 100,
-    "eventStartAt": "2025-05-01T09:00:00",
-    "eventEndAt": "2025-05-31T23:59:59"
+    "eventStartAt": "2025-10-01T09:00:00",
+    "eventEndAt": "2025-10-30T23:59:59"
   }
 }
 
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ### 4. 상품 단건 조회
-GET http://localhost:8080/v3/products/e61caf66-b5c0-4e23-bb9f-fd75821efc67
+GET http://localhost:8080/v3/products/cbbf3680-2224-4287-bc34-7bc3b1cd2abd
 Content-Type: application/json
 
 ### 5. 상품 정보 수정
