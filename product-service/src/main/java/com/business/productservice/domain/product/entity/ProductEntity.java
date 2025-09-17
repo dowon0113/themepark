@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Table(name = "p_products")
+@Table(name = "p_products", schema = "product_service")
 @NoArgsConstructor
 public class ProductEntity extends BaseEntity {
 
@@ -49,7 +49,7 @@ public class ProductEntity extends BaseEntity {
     private LocalDateTime eventEndAt;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    private StockEntity stock = new StockEntity();
+    private StockEntity stock;
 
     @Builder
     public ProductEntity(String name, String description, ProductType productType,
@@ -85,9 +85,21 @@ public class ProductEntity extends BaseEntity {
         return product;
     }
 
+//    public void addStock(StockEntity stock) {
+//        this.stock=stock;
+//    }
     public void addStock(StockEntity stock) {
-        this.stock=stock;
+        this.stock = stock;
+        if (stock.getProduct() != this) {
+            // 역방향도 일치시킴 (이미 constructor에서 해주지만 안전장치)
+            try {
+                var field = StockEntity.class.getDeclaredField("product");
+                field.setAccessible(true);
+                field.set(stock, this);
+            } catch (Exception ignored) {}
+        }
     }
+
 
     public void update(String name, String description, ProductType productType,
                        Integer price, LocalDateTime eventStartAt, LocalDateTime eventEndAt,

@@ -30,6 +30,10 @@ dependencyManagement {
 }
 
 dependencies {
+
+	//rabbitMQ
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
 	// Spring Cloud starter
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 

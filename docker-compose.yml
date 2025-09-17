@@ -1,14 +1,14 @@
 services:
-  eureka-server:
-    build:
-      context: ./eureka  # eureka 서버 Dockerfile이 있는 경로
-    container_name: eureka-server
-    ports:
-      - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - msa-network
+#  eureka-server:
+#    build:
+#      context: ./eureka  # eureka 서버 Dockerfile이 있는 경로
+#    container_name: eureka-server
+#    ports:
+#      - "8761:8761"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - msa-network
 
   postgres:
     image: postgres:latest
@@ -101,9 +101,19 @@ services:
     networks:
       - prometheus-network  # Grafana를 prometheus-network에 연결
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"    # 애플리케이션이 접속하는 AMQP 포트
+      - "15672:15672"  # 웹 관리 콘솔 포트
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
 
 volumes:
   pgdata:
+  rabbitmq_data:
 
 networks:
   prometheus-network:
