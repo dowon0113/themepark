@@ -170,12 +170,17 @@ docker ps
 </details>
 
 <details>
-<summary>Flow Chart</summary>
-        <img src= "https://github.com/user-attachments/assets/51bfd0df-0e47-4bef-a900-6d7d8dbd867c" width="500">
-        <img src= "https://github.com/user-attachments/assets/d2c71a53-2a0f-4b08-a223-8a3d44bfb497" width="500">
-        <img src= "https://github.com/user-attachments/assets/b6500d74-f379-4b91-980e-3990fa7c4869" width="500">
-        <img src= "https://github.com/user-attachments/assets/0a81e5a7-0d33-4ba0-a20d-c1dc16db7d21" width="500">
-        <img src= "https://github.com/user-attachments/assets/2bebbcdd-4f65-45b1-ad00-9eff0eb45a5d" width="500">
+<summary>시퀀스 다이어그</summary>
+    - 비관락
+        <img src= "<img width="1293" height="1456" alt="image" src="https://github.com/user-attachments/assets/4829f186-1a94-45b7-9219-e5ec3743ad9b" />
+" width="500">
+    - 분산락
+        <img src= "<img width="1567" height="3155" alt="image" src="https://github.com/user-attachments/assets/2346bee6-2da7-4d0d-90ea-7c4e9ae9b5a4" />
+" width="500">
+    - 비동기 전환 설계
+        <img src= "<img width="1219" height="677" alt="image" src="https://github.com/user-attachments/assets/963ae13c-010d-4f30-9ba8-6c801162cf4e" />
+" width="500">
+        
 </details>
 
 <br><br>
