@@ -27,16 +27,6 @@
 
 <br><br>
 
-
-## 팀원 소개
-
-| [김도원](https://github.com/dowon0113) | [문고은](https://github.com/moongzz) | [신다은](https://github.com/devdaeun) | [김대중](https://github.com/djmachine) |
-| --- | --- | --- | --- |
-| <a href="https://github.com/dowon0113"><img height="150px" width="130px" src="https://github.com/user-attachments/assets/6d3e3b18-3e88-4f19-889b-2ec0ce2cfcb1"/></a> | <a href="https://github.com/moongzz"><img height="150px" width="130px" src="https://github.com/user-attachments/assets/14b98138-b68b-44e7-85b2-1b8ac2640e81"/></a> | <a href="https://github.com/devdaeun"><img height="150px" width="130px" src="https://github.com/user-attachments/assets/4b8ef41c-ebfe-4e3b-81ff-e908e1f46b28"/></a> | <a href="https://github.com/djmachine"><img height="150px" width="130px" src="https://github.com/user-attachments/assets/7ef09772-7d4d-46f9-b657-6d3e0bdc2430"/></a> | 
-| 상품, 티켓팅 | 인증/인가, 유저, 슬랙 | 테마파크, 대기열, 해시태그 | 주문, 결제 | 
-
-<br><br>
-
 ## 프로젝트 일정 및 진행
 
 ### 4.3 ~ 4.4
@@ -67,7 +57,7 @@
 
 ## 개발 환경
 
-본 프로젝트는 Java와 Spring Boot 기반으로 개발되었으며, MSA 구조에서 각 서비스 간 유기적인 연동을 위해 Eureka 기반의 서비스 레지스트리와 FeignClient를 활용한 REST 통신을 v1에 구성했습니다. 서비스 확장성을 고려하여 v2에는 Redis 캐싱을 도입하였으며, v3에는 Kafka 기반 비동기 메세지 처리를 구현하였습니다. 인증과 인가는 Spring Security와 JWT를 통해 stateless 기반의 보안 처리를 구현했으며, 데이터 처리에는 Spring Data JPA와 QueryDSL을 적용하여 복잡한 조건의 데이터 조회도 유연하게 처리할 수 있도록 했습니다.
+본 프로젝트는 Java와 Spring Boot 기반으로 개발되었으며, MSA 구조에서 각 서비스 간 유기적인 연동을 위해 Eureka 기반의 서비스 레지스트리와 FeignClient를 활용한 REST 통신을 v1에 구성했습니다. 서비스 확장성을 고려하여 v2에는 Redisson 분산락 도입하였으며, v3에는 RabbitMQ 기반 비동기 메세지 처리를 구현하였습니다. 인증과 인가는 Spring Security와 JWT를 통해 stateless 기반의 보안 처리를 구현했으며, 데이터 처리에는 Spring Data JPA와 QueryDSL을 적용하여 복잡한 조건의 데이터 조회도 유연하게 처리할 수 있도록 했습니다.
 각 도메인 별 데이터 독립성을 고려하여 서비스별 DB 분리를 지향했으나, 학습 환경의 제약으로 인해 하나의 데이터베이스 내에서 스키마를 분리하는 방식으로 논리적인 격리를 구현하였습니다.
 
 로컬에서도 전체 MSA 환경을 손쉽게 구동할 수 있도록 Docker와 Docker Compose를 활용하여 서비스 실행 환경을 통합 구성했습니다. 이를 통해 개발자 간 환경 차이를 줄이고, 테스트 및 배포 전 과정을 효율적으로 수행할 수 있도록 했습니다.
@@ -156,12 +146,6 @@ docker ps
 <summary>API 구현</summary>
 <div>
 <img src="https://github.com/user-attachments/assets/f6a6ab2e-7516-4d92-b0f3-54415a178a69" width="500">
-</div>
-</details>
-<details>
-<summary>인프라 설계도</summary>
-<div>
-<img src="https://github.com/user-attachments/assets/1a6bdf00-b0ac-48a0-a6ef-f07bba1099f9" width="500">
 </div>
 </details>
 <details>
