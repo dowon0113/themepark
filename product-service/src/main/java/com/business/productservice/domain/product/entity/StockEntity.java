@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Table(name = "p_product_stocks")
+@Table(name = "p_product_stocks", schema = "product_service")
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
