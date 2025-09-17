@@ -170,17 +170,14 @@ docker ps
 </details>
 
 <details>
-<summary>시퀀스 다이어그</summary>
-    - 비관락
-        <img src= "<img width="1293" height="1456" alt="image" src="https://github.com/user-attachments/assets/4829f186-1a94-45b7-9219-e5ec3743ad9b" />
-" width="500">
-    - 분산락
-        <img src= "<img width="1567" height="3155" alt="image" src="https://github.com/user-attachments/assets/2346bee6-2da7-4d0d-90ea-7c4e9ae9b5a4" />
-" width="500">
-    - 비동기 전환 설계
-        <img src= "<img width="1219" height="677" alt="image" src="https://github.com/user-attachments/assets/963ae13c-010d-4f30-9ba8-6c801162cf4e" />
-" width="500">
-        
+<summary>시퀀스 다이어그램</summary>
+- 비관락
+<img width="1293" height="1456" alt="image" src="https://github.com/user-attachments/assets/eccb7433-5cbc-4d8c-9b4f-61490c212aff" />
+- 분산락
+<img width="1567" height="3155" alt="image" src="https://github.com/user-attachments/assets/0628813a-3b2a-4646-a823-137c1e24219d" />
+- 비동기 전환 설계
+<img width="1219" height="677" alt="image" src="https://github.com/user-attachments/assets/a342db14-779c-4022-b24f-bc34a356b3c0" />
+
 </details>
 
 <br><br>
