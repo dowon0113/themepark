@@ -1,6 +1,9 @@
 package com.sparta.orderservice.order.presentation.controller.v1;
 
+import com.sparta.orderservice.order.application.dto.reponse.ReqOrderPostDTOApiV1;
+import com.sparta.orderservice.order.application.dto.reponse.ResOrderPostDTOApiV1;
 import com.sparta.orderservice.order.application.facade.v1.OrderFacadeV1;
+import com.sparta.orderservice.order.application.service.OrderServiceApiV1;
 import com.sparta.orderservice.order.domain.entity.OrderEntity;
 import com.sparta.orderservice.order.presentation.dto.v1.response.ResOrderPostDtoApiV1;
 import com.sparta.orderservice.order.presentation.dto.v1.response.ResOrdersGetByIdDtoApiV1;
@@ -8,6 +11,7 @@ import com.sparta.orderservice.order.presentation.dto.v1.request.ReqOrderPutDtoA
 import com.sparta.orderservice.order.presentation.dto.v1.request.ReqOrdersPostDtoApiV1;
 import com.github.themepark.common.application.dto.ResDTO;
 import com.sparta.orderservice.order.presentation.dto.v1.response.ResOrderGetDtoApiV1;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -22,24 +26,57 @@ import java.util.UUID;
 public class OrderControllerApiV1 {
 
     private final OrderFacadeV1 orderFacadeV1;
+    private final OrderServiceApiV1 orderServiceApiV1;
 
+    // 소프트 예약
     @PostMapping
-    public ResponseEntity<ResDTO<ResOrderPostDtoApiV1>> postBy(
-           @RequestBody ReqOrdersPostDtoApiV1 reqOrdersPostDtoApiV1,
-           @RequestHeader("X-User-Id") Long userId
-           )  {
-
-        ResOrderPostDtoApiV1 resOrderPostDtoApiV1 = orderFacadeV1.processOrder(userId, reqOrdersPostDtoApiV1);
-
+    public ResponseEntity<ResDTO<ResOrderPostDTOApiV1>> postBy(
+            @Valid @RequestBody ReqOrderPostDTOApiV1 dto
+            ){
+        ResOrderPostDTOApiV1 responseDto = orderServiceApiV1.postBy(dto);
         return new ResponseEntity<>(
-                ResDTO.<ResOrderPostDtoApiV1>builder()
-                        .code("0")
-                        .message("주문을 생성하였습니다!")
-                        .data(resOrderPostDtoApiV1)
-                        .build(),
+                ResDTO.<ResOrderPostDTOApiV1>builder()
+                .code("0")
+                .message("주문 등록에 성공했습니다.")
+                .data(responseDto)
+                .build(),
                 HttpStatus.CREATED
         );
     }
+
+    // 동기 예약 (비관락)
+//    @PostMapping
+//    public ResponseEntity<ResDTO<ResOrderPostDTOApiV1>> postBy(
+//            @Valid @RequestBody ReqOrderPostDTOApiV1 dto
+//    ){
+//        ResOrderPostDTOApiV1 responseDto = orderServiceApiV1.postByWithLock(dto);
+//        return new ResponseEntity<>(
+//                ResDTO.<ResOrderPostDTOApiV1>builder()
+//                        .code("0")
+//                        .message("주문 등록에 성공했습니다.")
+//                        .data(responseDto)
+//                        .build(),
+//                HttpStatus.CREATED
+//        );
+//    }
+
+//    @PostMapping
+//    public ResponseEntity<ResDTO<ResOrderPostDtoApiV1>> postBy(
+//           @RequestBody ReqOrdersPostDtoApiV1 reqOrdersPostDtoApiV1,
+//           @RequestHeader("X-User-Id") Long userId
+//           )  {
+//
+//        ResOrderPostDtoApiV1 resOrderPostDtoApiV1 = orderFacadeV1.processOrder(userId, reqOrdersPostDtoApiV1);
+//
+//        return new ResponseEntity<>(
+//                ResDTO.<ResOrderPostDtoApiV1>builder()
+//                        .code("0")
+//                        .message("주문을 생성하였습니다!")
+//                        .data(resOrderPostDtoApiV1)
+//                        .build(),
+//                HttpStatus.CREATED
+//        );
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ResDTO<Object>> updateBy(
